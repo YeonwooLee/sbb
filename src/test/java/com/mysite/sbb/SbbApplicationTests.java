@@ -4,6 +4,7 @@ import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,10 +22,22 @@ class SbbApplicationTests {
 
 	@Autowired
 	private QuestionRepository questionRepository;
+	@Autowired
+	private QuestionService questionService;
 
 	@Autowired
 	private AnswerRepository answerRepository;
 
+
+	@Test
+	void 게시글_생성(){
+		for(int i=1;i<=302;i++){
+			String subject = String.format("테스트 데이터입니다:[%03d]",i);
+			String content = "내용무";
+			questionService.create(subject,content,null);
+
+		}
+	}
 	@Test
 	void testJpa() {
 		Question q1 = new Question();
